@@ -5,18 +5,18 @@ import java.util.Date;
 
 public class Prescriptions {
 	protected int prescriptionId;
-	protected Customers customer;
-	protected Drugs drug;
+	protected String customerUserName;
+	protected String drugId;
 	protected Date fillDate;
-	protected Doctors doctor;
+	protected String doctorUserName;
 	
 	// all-fields constructor
-	public Prescriptions(int prescriptionId, Customers customer, Drugs drug, Date fillDate, Doctors doctor) {
+	public Prescriptions(int prescriptionId, String customerUserName, String drugId, Date fillDate, String doctorUserName) {
 		this.prescriptionId = prescriptionId;
-		this.customer = customer;
-		this.drug = drug;
+		this.customerUserName = customerUserName;
+		this.drugId = drugId;
 		this.fillDate = fillDate;
-		this.doctor = doctor;
+		this.doctorUserName = doctorUserName;
 	}
 
 	// PK-only constructor
@@ -25,11 +25,11 @@ public class Prescriptions {
 	}
 
 	// no-PK constructor
-	public Prescriptions(Customers customer, Drugs drug, Date fillDate, Doctors doctor) {
-		this.customer = customer;
-		this.drug = drug;
+	public Prescriptions(String customerUserName, String drugId, Date fillDate, String doctorUserName) {
+		this.customerUserName = customerUserName;
+		this.drugId = drugId;
 		this.fillDate = fillDate;
-		this.doctor = doctor;
+		this.doctorUserName = doctorUserName;
 	}
 
 	public int getPrescriptionId() {
@@ -40,20 +40,20 @@ public class Prescriptions {
 		this.prescriptionId = prescriptionId;
 	}
 
-	public Customers getCustomer() {
-		return customer;
+	public String getCustomerUserName() {
+		return customerUserName;
 	}
 
-	public void setCustomer(Customers customer) {
-		this.customer = customer;
+	public void setCustomerUserName(String customerUserName) {
+		this.customerUserName = customerUserName;
 	}
 
-	public Drugs getDrug() {
-		return drug;
+	public String getDrugId() {
+		return drugId;
 	}
 
-	public void setDrug(Drugs drug) {
-		this.drug = drug;
+	public void setDrugId(String drugId) {
+		this.drugId = drugId;
 	}
 
 	public Date getFillDate() {
@@ -64,11 +64,13 @@ public class Prescriptions {
 		this.fillDate = fillDate;
 	}
 
-	public Doctors getDoctor() {
-		return doctor;
+	public String getDoctorUserName() {
+		return doctorUserName;
 	}
 
-	public void setDoctor(Doctors doctor) {
-		this.doctor = doctor;
+	public void setDoctorUserName(String doctorUserName) {
+		this.doctorUserName = doctorUserName;
 	}
+	
+
 }
