@@ -15,14 +15,14 @@
 </head>
 <body class="mt-4 px-5">
 	<h1>Update Prescription</h1>
-	<form action="prescriptionupdate" method="post">
+	<form action="reactionupdate" method="post">
 		<p>
-			<label for="prescriptionid">PrescriptionId</label>
-			<input id="prescriptionid" name="prescriptionid" value="${fn:escapeXml(param.username)}">
+			<label for="reactionid">PrescriptionId</label>
+			<input id="reactionid" name="reactionid" value="${fn:escapeXml(param.username)}">
 		</p>
 		<p>
-			<label for="filldate">New FillDate (yyyy-mm-dd)</label>
-			<input id="filldate" name="filldate" value="">
+			<label for="description">New Description</label>
+			<input id="description" name="description" value="">
 		</p>
 		<p>
 			<input type="submit">

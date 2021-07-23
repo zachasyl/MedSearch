@@ -4,6 +4,7 @@ import model.*;
 import dal.*;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,14 +18,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/reactionsupdate")
-public class ReactionsUpdate extends HttpServlet {
+@WebServlet("/prescriptionsupdate")
+public class PrescriptionsUpdate extends HttpServlet {
 	
-	protected ReactionsDao reactionsDao;
+	protected PrescriptionsDao prescriptionsDao;
 	
 	@Override
 	public void init() throws ServletException {
-		reactionsDao = ReactionsDao.getInstance();
+		prescriptionsDao = PrescriptionsDao.getInstance();
 	}
 	
 	@Override
@@ -35,16 +36,16 @@ public class ReactionsUpdate extends HttpServlet {
         req.setAttribute("messages", messages);
 
         // Retrieve user and validate.
-        int reactionId= req.getParameter("ReactionId");
-        if (reactionId < 0) {
-            messages.put("success", "Please enter a valid reactionId");
+        int prescriptionId= req.getParameter("PrescriptionId");
+        if (prescriptionId < 0) {
+            messages.put("success", "Please enter a valid prescriptionId");
         } else {
         	try {
-        		Reactions reaction = reactionsDao.getReactionById(reactionId);
-        		if(reactionId == 0) {
-        			messages.put("success", "ReactionId does not exist.");
+        		Prescriptions prescription = prescriptionsDao.getPrescriptionByPrescriptionId(prescriptionId);
+        		if(prescriptionId == 0) {
+        			messages.put("success", "PrescriptionId does not exist.");
         		}
-        		req.setAttribute("reaction", reaction);
+        		req.setAttribute("prescription", prescription);
         	} catch (SQLException e) {
 				e.printStackTrace();
 				throw new IOException(e);
@@ -62,24 +63,24 @@ public class ReactionsUpdate extends HttpServlet {
         req.setAttribute("messages", messages);
 
         // Retrieve user and validate.
-        int reactionId = req.getParameter("reactionid");
-        if (reactionId < 0) {
-            messages.put("success", "Please enter a valid ReactionId.");
+        int prescriptionId = req.getParameter("prescriptionid");
+        if (prescriptionId < 0) {
+            messages.put("success", "Please enter a valid PrescriptionId.");
         } else {
         	try {
-        		Reactions reaction = reactionsDao.getReactionById(reactionId);
-        		if(reaction == null) {
-        			messages.put("success", "ReactionId does not exist. No update to perform.");
+        		Prescriptions prescription = prescriptionsDao.getPrescriptionByPrescriptionId(prescriptionId);
+        		if(prescription == null) {
+        			messages.put("success", "PrescriptionId does not exist. No update to perform.");
         		} else {
-        			String newDescription = req.getParameter("description");
-        			if (newDescription == null || newDescription.trim().isEmpty()) {
-        	            messages.put("success", "Please enter a valid Description.");
+        			Date newFillDate = req.getParameter("fillDate");
+        			if (newFillDate == null) {
+        	            messages.put("success", "Please enter a valid FillDate.");
         	        } else {
-        	        	reaction = reactionsDao.updateDescription(reaction, newDescription);
-        	        	messages.put("success", "Successfully updated " + reactionId);
+        	        	prescription = prescriptionsDao.updateFillDate(prescription, newFillDate);
+        	        	messages.put("success", "Successfully updated " + prescriptionId);
         	        }
         		}
-        		req.setAttribute("reaction", reaction);
+        		req.setAttribute("prescription", prescription);
         	} catch (SQLException e) {
 				e.printStackTrace();
 				throw new IOException(e);
