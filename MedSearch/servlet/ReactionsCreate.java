@@ -44,7 +44,7 @@ public class ReactionsCreate extends HttpServlet {
         // Map for storing messages.
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
-        int reactionId = req.getParameter("reactionid");
+        int reactionId = Integer.parseInt(req.getParameter("reactionid"));
         if (reactionId <= 0) {
             messages.put("success", "Invalid ReactionId");
         } else {

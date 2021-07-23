@@ -14,7 +14,7 @@ import java.util.List;
 public class ConnectionManager {
 	
 	private final String user = "yu_hsuan";
-	private final String password = "cs5200group4";
+	private final String password = "fullstackdrugsgroup4";
 	private final String hostName = "medsearch.cuzo0rpeaecu.us-east-2.rds.amazonaws.com";
 	private final int port = 3306;
 	private final String schema = "MedSearch";
