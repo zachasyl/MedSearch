@@ -11,16 +11,16 @@
 	rel="stylesheet"
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous">
-<title>Find Drugs</title>
+<title>Find Prescriptions</title>
 </head>
 <body class="mt-4 px-5">
 	<div>
 		<h1 class="display-4">MedSearch: Find Prescriptions</h1>
 		<h2 class="lead">Look Up Prescription by Prescription ID</h2>
 		<hr class="my-4">
-		<form action="findPrescription" method="post">
+		<form action="findprescriptions" method="post">
 			<p>
-				<label for="prescriptionId">Drug ID: </label> <input id="prescriptionId"
+				<label for="prescriptionId">Prescription ID: </label> <input id="prescriptionId"
 					name="prescriptionId" value="${param.prescriptionId}" placeholder="123456"
 					required>
 			</p>
@@ -50,13 +50,13 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:if test="${drug!=null}">
+				<c:if test="${prescription!=null}">
 					<tr>
-						<td>${drug.getPrescriptionId()}</td>
-						<td>${drug.getCustomerUserName()}</td>
-						<td>${drug.getDrugId()}</td>
-						<td>${drug.getFillDate()}</td>
-						<td>${drug.getDoctorUserName()}</td>
+						<td>${prescription.getPrescriptionId()}</td>
+						<td>${prescription.getCustomerUserName()}</td>
+						<td>${prescription.getDrugId()}</td>
+						<td>${prescription.getFillDate()}</td>
+						<td>${prescription.getDoctorUserName()}</td>
 					</tr>
 				</c:if>
 			</tbody>
