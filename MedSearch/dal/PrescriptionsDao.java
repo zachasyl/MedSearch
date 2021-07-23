@@ -69,6 +69,33 @@ public class PrescriptionsDao {
 		}
 	}
 	
+	public Prescriptions updateFillDate(Prescriptions prescription, Date newFilldate) throws SQLException {
+		String updatePrescription = "UPDATE Prescriptions SET Filldate = ? WHERE PrescriptionId = ?;";
+		Connection connection = null;
+		PreparedStatement updateStmt = null;
+		
+		try {
+			connection = connectionManager.getConnection();
+			updateStmt = connection.prepareStatement(updatePrescription);
+			updateStmt.setDate(1, newFilldate);
+			updateStmt.setInt(2, prescription.getPrescriptionId());
+			updateStmt.executeUpdate();
+			// update the prescription instance
+			prescription.setFillDate(newFilldate);
+			return prescription;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(updateStmt != null) {
+				updateStmt.close();
+			}
+		}
+	}
+	
 	public Prescriptions delete(Prescriptions prescription) throws SQLException {
 		String deletePrescription = "DELETE FROM Prescriptions WHERE PrescriptionName = ?;";
 		Connection connection = null;
