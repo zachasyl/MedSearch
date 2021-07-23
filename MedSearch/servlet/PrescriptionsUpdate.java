@@ -36,7 +36,7 @@ public class PrescriptionsUpdate extends HttpServlet {
         req.setAttribute("messages", messages);
 
         // Retrieve user and validate.
-        int prescriptionId= req.getParameter("PrescriptionId");
+        int prescriptionId= Integer.parseInt(req.getParameter("PrescriptionId"));
         if (prescriptionId < 0) {
             messages.put("success", "Please enter a valid prescriptionId");
         } else {
@@ -63,7 +63,7 @@ public class PrescriptionsUpdate extends HttpServlet {
         req.setAttribute("messages", messages);
 
         // Retrieve user and validate.
-        int prescriptionId = req.getParameter("prescriptionid");
+        int prescriptionId = Integer.parseInt(req.getParameter("PrescriptionId"));
         if (prescriptionId < 0) {
             messages.put("success", "Please enter a valid PrescriptionId.");
         } else {
@@ -72,7 +72,7 @@ public class PrescriptionsUpdate extends HttpServlet {
         		if(prescription == null) {
         			messages.put("success", "PrescriptionId does not exist. No update to perform.");
         		} else {
-        			Date newFillDate = req.getParameter("fillDate");
+        			Date newFillDate = Date.valueOf(req.getParameter("fillDate"));
         			if (newFillDate == null) {
         	            messages.put("success", "Please enter a valid FillDate.");
         	        } else {
