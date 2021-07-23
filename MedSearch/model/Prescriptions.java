@@ -31,6 +31,14 @@ public class Prescriptions {
 		this.fillDate = fillDate;
 		this.doctorUserName = doctorUserName;
 	}
+	
+	public Prescriptions(String customerUserName, String drugId,  String doctorUserName) {
+		this.customerUserName = customerUserName;
+		this.drugId = drugId;
+		this.fillDate = new Date();
+		this.doctorUserName = doctorUserName;
+	}
+
 
 	public int getPrescriptionId() {
 		return prescriptionId;
