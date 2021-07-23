@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -87,8 +88,8 @@ public List<Pharmacies> getPharmacyFromPharmacyName(String pharmacyname) throws 
 		while(results.next()) {
 			String username = results.getString("UserName");
 			String resultPharmacyName = results.getString("PharmacyName");
-			Date opentime = results.getDate("OpenTime");
-			Date closetime = results.getDate("OpenTime");
+			Time opentime = results.getTime("OpenTime");
+			Time closetime = results.getTime("OpenTime");
 			String password = results.getString("Password");
 			String phone = results.getString("Phone");
 			String street1 = results.getString("Street1");

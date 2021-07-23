@@ -120,7 +120,7 @@ public class PrescriptionsDao {
 		}
 	}
 	
-	public Prescriptions getPrescriptionByPrescriptionId(String prescriptionId) throws SQLException {
+	public Prescriptions getPrescriptionByPrescriptionId(int prescriptionId) throws SQLException {
 		String selectPrescription = "SELECT * FROM Prescriptions WHERE PrescriptionId = ?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
@@ -129,7 +129,7 @@ public class PrescriptionsDao {
 		try {
 			connection = connectionManager.getConnection();
 			selectStmt = connection.prepareStatement(selectPrescription);
-			selectStmt.setString(1, prescriptionId);
+			selectStmt.setInt(1, prescriptionId);
 			results = selectStmt.executeQuery();
 			
 			if (results.next()) {
