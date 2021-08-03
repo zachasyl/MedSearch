@@ -1,16 +1,16 @@
 package model;
 
-import java.sql.Time;
+import java.util.Date;
 
 
 public class Pharmacies extends Users {
 	protected String pharmacyName;
-	protected Time openTime;
-	protected Time closeTime;
+	protected Date openTime;
+	protected Date closeTime;
 	
 	// all-fields constructor
 	public Pharmacies(String userName, String password, String phone, String street1, String street2, String city,
-			String state, String zipcode, String pharmacyName, Time openTime, Time closeTime) {
+			String state, String zipcode, String pharmacyName, Date openTime, Date closeTime) {
 		super(userName, password, phone, street1, street2, city, state, zipcode);
 		this.pharmacyName = pharmacyName;
 		this.openTime = openTime;
@@ -30,19 +30,19 @@ public class Pharmacies extends Users {
 		this.pharmacyName = pharmacyName;
 	}
 
-	public Time getOpenTime() {
+	public Date getOpenTime() {
 		return openTime;
 	}
 
-	public void setOpenTime(Time openTime) {
+	public void setOpenTime(Date openTime) {
 		this.openTime = openTime;
 	}
 
-	public Time getCloseTime() {
+	public Date getCloseTime() {
 		return closeTime;
 	}
 
-	public void setCloseTime(Time closeTime) {
+	public void setCloseTime(Date closeTime) {
 		this.closeTime = closeTime;
 	}
 }

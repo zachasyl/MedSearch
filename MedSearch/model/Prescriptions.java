@@ -5,18 +5,18 @@ import java.util.Date;
 
 public class Prescriptions {
 	protected int prescriptionId;
-	protected String customerUserName;
-	protected String drugId;
+	protected Customers customer;
+	protected Drugs drug;
 	protected Date fillDate;
-	protected String doctorUserName;
+	protected Doctors doctor;
 	
 	// all-fields constructor
-	public Prescriptions(int prescriptionId, String customerUserName, String drugId, Date fillDate, String doctorUserName) {
+	public Prescriptions(int prescriptionId, Customers customer, Drugs drug, Date fillDate, Doctors doctor) {
 		this.prescriptionId = prescriptionId;
-		this.customerUserName = customerUserName;
-		this.drugId = drugId;
+		this.customer = customer;
+		this.drug = drug;
 		this.fillDate = fillDate;
-		this.doctorUserName = doctorUserName;
+		this.doctor = doctor;
 	}
 
 	// PK-only constructor
@@ -25,20 +25,12 @@ public class Prescriptions {
 	}
 
 	// no-PK constructor
-	public Prescriptions(String customerUserName, String drugId, Date fillDate, String doctorUserName) {
-		this.customerUserName = customerUserName;
-		this.drugId = drugId;
+	public Prescriptions(Customers customer, Drugs drug, Date fillDate, Doctors doctor) {
+		this.customer = customer;
+		this.drug = drug;
 		this.fillDate = fillDate;
-		this.doctorUserName = doctorUserName;
+		this.doctor = doctor;
 	}
-	
-	public Prescriptions(String customerUserName, String drugId,  String doctorUserName) {
-		this.customerUserName = customerUserName;
-		this.drugId = drugId;
-		this.fillDate = new Date();
-		this.doctorUserName = doctorUserName;
-	}
-
 
 	public int getPrescriptionId() {
 		return prescriptionId;
@@ -48,20 +40,20 @@ public class Prescriptions {
 		this.prescriptionId = prescriptionId;
 	}
 
-	public String getCustomerUserName() {
-		return customerUserName;
+	public Customers getCustomer() {
+		return customer;
 	}
 
-	public void setCustomerUserName(String customerUserName) {
-		this.customerUserName = customerUserName;
+	public void setCustomer(Customers customer) {
+		this.customer = customer;
 	}
 
-	public String getDrugId() {
-		return drugId;
+	public Drugs getDrug() {
+		return drug;
 	}
 
-	public void setDrugId(String drugId) {
-		this.drugId = drugId;
+	public void setDrug(Drugs drug) {
+		this.drug = drug;
 	}
 
 	public Date getFillDate() {
@@ -72,13 +64,11 @@ public class Prescriptions {
 		this.fillDate = fillDate;
 	}
 
-	public String getDoctorUserName() {
-		return doctorUserName;
+	public Doctors getDoctor() {
+		return doctor;
 	}
 
-	public void setDoctorUserName(String doctorUserName) {
-		this.doctorUserName = doctorUserName;
+	public void setDoctor(Doctors doctor) {
+		this.doctor = doctor;
 	}
-	
-
 }
