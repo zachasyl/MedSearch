@@ -28,13 +28,14 @@ public class FindPrescriptions extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		Prescriptions prescription = null;
+		String inputPrescriptionId = req.getParameter("prescriptionId");
 		
-		String prescriptionId = req.getParameter("prescriptionId");
-		
-		if (prescriptionId != null && !prescriptionId.trim().isEmpty()) {
+		if (inputPrescriptionId != null && !inputPrescriptionId.trim().isEmpty()) {
 			try {
+				// convert it back to int to be used in DAO
+				int prescriptionId = Integer.parseInt(inputPrescriptionId);
 				prescription = prescriptionsDao.getPrescriptionByPrescriptionId(prescriptionId);
-				req.setAttribute("success", "Displaying results for " + prescriptionId);
+				req.setAttribute("success", "Displaying results for prescription with ID " + prescriptionId);
 			} catch (SQLException e) {
 				e.printStackTrace();
 				throw new IOException(e);
@@ -48,13 +49,14 @@ public class FindPrescriptions extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		Prescriptions prescription = null;
-		String prescriptionId = req.getParameter("prescriptionId");
+		String inputPrescriptionId = req.getParameter("prescriptionId");
 		
-		if (prescriptionId != null && !prescriptionId.trim().isEmpty()) {
+		if (inputPrescriptionId != null && !inputPrescriptionId.trim().isEmpty()) {
 			try {
+				// convert it back to int to be used in DAO
+				int prescriptionId = Integer.parseInt(inputPrescriptionId);
 				prescription = prescriptionsDao.getPrescriptionByPrescriptionId(prescriptionId);
-				req.setAttribute("success", "Displaying results for " + prescriptionId);
-				
+				req.setAttribute("success", "Displaying results for prescription with ID " + prescriptionId);
 			} catch (SQLException e) {
 				e.printStackTrace();
 				throw new IOException(e);

@@ -18,9 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/usercreate")
+@WebServlet("/reactionscreate")
 public class ReactionsCreate extends HttpServlet {
-	
 	protected ReactionsDao reactionsDao;
 	
 	@Override
@@ -31,38 +30,51 @@ public class ReactionsCreate extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// Map for storing messages.
-        Map<String, String> messages = new HashMap<String, String>();
-        req.setAttribute("messages", messages);
-        //Just render the JSP.   
-        req.getRequestDispatcher("/UserCreate.jsp").forward(req, resp);
+        //Just render the JSP  
+        req.getRequestDispatcher("/ReactionsCreate.jsp").forward(req, resp);
 	}
 	
 	@Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
     		throws ServletException, IOException {
-        // Map for storing messages.
+        // Map for storing messages
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
-        int reactionId = Integer.parseInt(req.getParameter("reactionid"));
-        if (reactionId <= 0) {
-            messages.put("success", "Invalid ReactionId");
-        } else {
-        	// Create the Reaction.
-        	Drugs drugIdA = req.getParameter("drugida");
-        	Drugs drugIdB = req.getParameter("drugidb");
-        	String drugName = req.getParameter("drugName");
-        	String description = req.getParameter("description");
-	        try {
-	        	// Exercise: parse the input for StatusLevel.
-	        	Reactions reaction = new Reactions(reactionId, drugIdA, drugIdB, drugName, description);
-	        	reaction = reactionsDao.create(reaction);
-	        	messages.put("success", "Successfully created " + reactionId);
-	        } catch (SQLException e) {
-				e.printStackTrace();
-				throw new IOException(e);
-	        }
-        }
         
-        req.getRequestDispatcher("/UserCreate.jsp").forward(req, resp);
-    }
+        Reactions reaction = null;
+        
+        // Retrieve inputs
+        String inputDrugIdA = req.getParameter("drugIdA");
+        String inputDrugIdB = req.getParameter("drugIdB");
+        String inputDescription = req.getParameter("description");
+        
+        if (inputDrugIdA == null || inputDrugIdA.trim().isEmpty() ||
+        	inputDrugIdB == null || inputDrugIdB.trim().isEmpty()) {
+        	messages.put("fail", "Please enter a valid drug ID.");
+        } else if (inputDescription == null || inputDescription.trim().isEmpty()) {
+        	messages.put("fail", "Please enter a valid description.");
+        } else {
+            try {
+            	DrugsDao drugsDao = DrugsDao.getInstance();
+            	Drugs inputDrugA = drugsDao.getDrugById(inputDrugIdA);
+            	Drugs inputDrugB = drugsDao.getDrugById(inputDrugIdB);
+   
+            	// Validate if the drugs exist
+            	if (inputDrugA == null || inputDrugB == null) {
+            		messages.put("fail", "Drug ID(s) do not exist.");
+            	} else {
+            		// Create a new reaction
+            		String inputDrugName = inputDrugB.getDrugName();
+            		reaction = new Reactions(inputDrugA, inputDrugB, inputDrugName, inputDescription);
+            		reaction = reactionsDao.create(reaction);
+                	messages.put("success", "Successfully created reaction with ID " + reaction.getReactionId());
+            	}
+            	req.setAttribute("reaction", reaction);
+            } catch (SQLException e) {
+    			e.printStackTrace();
+    			throw new IOException(e);
+    	    }
+        }
+        req.getRequestDispatcher("/ReactionsCreate.jsp").forward(req, resp);
+	}
+}

@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/userdelete")
 public class UserDelete extends HttpServlet {
-	protected UsersDao UsersDao;
+	protected UsersDao usersDao;
 	@Override
 	public void init() throws ServletException {
-		UsersDao = UsersDao.getInstance();
+		usersDao = UsersDao.getInstance();
 	}
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -34,23 +34,28 @@ public class UserDelete extends HttpServlet {
         // Map for storing messages.
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
+        
         // Retrieve and validate name.
         String userName = req.getParameter("username");
         if (userName == null || userName.trim().isEmpty()) {
-            messages.put("title", "Invalid UserName");
-            messages.put("disableSubmit", "true");
+            messages.put("fail", "Invalid Username");
+            messages.put("disableSubmit", "false");
         } else {
-        	// Delete the BlogUser.
-	        Users User = new Users(userName);
 	        try {
-	        	User = UsersDao.delete(User);
-	        	// Update the message.
-		        if (User == null) {
-		            messages.put("title", "Successfully deleted " + userName);
-		            messages.put("disableSubmit", "true");
+	        	// Check if the user exists
+		        Users user = usersDao.getUserByUserName(userName);
+		        if (user == null) {
+		        	messages.put("fail", "The username does not exist.");
 		        } else {
-		        	messages.put("title", "Failed to delete " + userName);
-		        	messages.put("disableSubmit", "false");
+		            // Delete the user
+		        	user = usersDao.delete(user);
+			        if (user == null) {
+			            messages.put("success", "Successfully deleted " + userName);
+			            messages.put("disableSubmit", "true");
+			        } else {
+			        	messages.put("fail", "Failed to delete " + userName);
+			        	messages.put("disableSubmit", "false");
+			        }	
 		        }
 	        } catch (SQLException e) {
 				e.printStackTrace();

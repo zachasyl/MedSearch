@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/prescriptionsupdate")
 public class PrescriptionsUpdate extends HttpServlet {
-	
 	protected PrescriptionsDao prescriptionsDao;
 	
 	@Override
@@ -31,62 +30,69 @@ public class PrescriptionsUpdate extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// Map for storing messages.
+		// Map for storing messages
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
 
-        // Retrieve user and validate.
-        int prescriptionId= Integer.parseInt(req.getParameter("PrescriptionId"));
-        if (prescriptionId < 0) {
-            messages.put("success", "Please enter a valid prescriptionId");
-        } else {
-        	try {
-        		Prescriptions prescription = prescriptionsDao.getPrescriptionByPrescriptionId(prescriptionId);
-        		if(prescriptionId == 0) {
-        			messages.put("success", "PrescriptionId does not exist.");
-        		}
-        		req.setAttribute("prescription", prescription);
-        	} catch (SQLException e) {
+        Prescriptions prescription = null;
+        
+        // Retrieve input ID and validate
+        String inputPrescriptionId = req.getParameter("prescriptionId");
+		
+		if (inputPrescriptionId != null && !inputPrescriptionId.trim().isEmpty()) {
+			try {
+				// Convert the ID back to int to be used in DAO
+				int prescriptionId = Integer.parseInt(inputPrescriptionId);
+				prescription = prescriptionsDao.getPrescriptionByPrescriptionId(prescriptionId);
+				// Check if a prescription with the given ID exists
+				if (prescription == null) {
+					messages.put("fail", "Prescription ID does not exist.");
+				}
+				req.setAttribute("prescription", prescription);
+			} catch (SQLException e) {
 				e.printStackTrace();
 				throw new IOException(e);
-	        }
-        }
-        
-        req.getRequestDispatcher("/UserUpdate.jsp").forward(req, resp);
+			}
+		}
+		req.getRequestDispatcher("/PrescriptionsUpdate.jsp").forward(req, resp);
 	}
 	
 	@Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
     		throws ServletException, IOException {
-        // Map for storing messages.
+		// Map for storing messages
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
-
-        // Retrieve user and validate.
-        int prescriptionId = Integer.parseInt(req.getParameter("PrescriptionId"));
-        if (prescriptionId < 0) {
-            messages.put("success", "Please enter a valid PrescriptionId.");
+        
+        Prescriptions prescription = null;
+        
+        // Retrieve input ID and validate
+        String inputPrescriptionId = req.getParameter("prescriptionId");
+        
+        if (inputPrescriptionId == null || inputPrescriptionId.trim().isEmpty()) {
+        	messages.put("fail", "Please enter a valid Prescription ID.");
         } else {
         	try {
-        		Prescriptions prescription = prescriptionsDao.getPrescriptionByPrescriptionId(prescriptionId);
-        		if(prescription == null) {
-        			messages.put("success", "PrescriptionId does not exist. No update to perform.");
-        		} else {
-        			Date newFillDate = Date.valueOf(req.getParameter("fillDate"));
-        			if (newFillDate == null) {
-        	            messages.put("success", "Please enter a valid FillDate.");
-        	        } else {
-        	        	prescription = prescriptionsDao.updateFillDate(prescription, newFillDate);
-        	        	messages.put("success", "Successfully updated " + prescriptionId);
-        	        }
-        		}
-        		req.setAttribute("prescription", prescription);
+	        	// Convert the ID back to int to be used in DAO
+				int prescriptionId = Integer.parseInt(inputPrescriptionId);
+				prescription = prescriptionsDao.getPrescriptionByPrescriptionId(prescriptionId);
+				// Check if a prescription with the given ID exists
+				if (prescription == null) {
+					messages.put("fail", "Prescription ID does not exist. No update is performed.");
+				} else {
+					// Retrieve input for new fill date
+					Date newFillDate = Date.valueOf(req.getParameter("newFillDate"));
+					// Perform update on the prescription
+					prescription = prescriptionsDao.updateFillDate(prescription, newFillDate);
+					messages.put("success", "Successfully updated fill date for prescription with ID " +
+								 prescriptionId);
+				}
+				req.setAttribute("prescription", prescription);
         	} catch (SQLException e) {
-				e.printStackTrace();
-				throw new IOException(e);
-	        }
+        		e.printStackTrace();
+        		throw new IOException(e);
+        	}
         }
-        
-        req.getRequestDispatcher("/UserUpdate.jsp").forward(req, resp);
-    }
+		req.getRequestDispatcher("/PrescriptionsUpdate.jsp").forward(req, resp);
+	}
 }
