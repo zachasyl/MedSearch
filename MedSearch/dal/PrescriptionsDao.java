@@ -27,8 +27,8 @@ public class PrescriptionsDao {
 	}
 	
 	public Prescriptions create(Prescriptions prescription) throws SQLException {
-		String insertPrescription = "INSERT INTO Prescriptions(Customer, Drug, " +
-							     "FillDate, Doctor) VALUES(?, ?, ?, ?);";
+		String insertPrescription = "INSERT INTO Prescriptions(CustomerUserName, DrugId, " +
+							        "FillDate, DoctorUserName) VALUES(?, ?, ?, ?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		ResultSet resultKey = null;
@@ -69,19 +69,19 @@ public class PrescriptionsDao {
 		}
 	}
 	
-	public Prescriptions updateFillDate(Prescriptions prescription, Date newFilldate) throws SQLException {
-		String updatePrescription = "UPDATE Prescriptions SET Filldate = ? WHERE PrescriptionId = ?;";
+	public Prescriptions updateFillDate(Prescriptions prescription, Date newFillDate) throws SQLException {
+		String updatePrescription = "UPDATE Prescriptions SET FillDate = ? WHERE PrescriptionId = ?;";
 		Connection connection = null;
 		PreparedStatement updateStmt = null;
 		
 		try {
 			connection = connectionManager.getConnection();
 			updateStmt = connection.prepareStatement(updatePrescription);
-			updateStmt.setDate(1, newFilldate);
+			updateStmt.setDate(1, newFillDate);
 			updateStmt.setInt(2, prescription.getPrescriptionId());
 			updateStmt.executeUpdate();
 			// update the prescription instance
-			prescription.setFillDate(newFilldate);
+			prescription.setFillDate(newFillDate);
 			return prescription;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -96,8 +96,10 @@ public class PrescriptionsDao {
 		}
 	}
 	
+	
+	
 	public Prescriptions delete(Prescriptions prescription) throws SQLException {
-		String deletePrescription = "DELETE FROM Prescriptions WHERE PrescriptionName = ?;";
+		String deletePrescription = "DELETE FROM Prescriptions WHERE PrescriptionId = ?;";
 		Connection connection = null;
 		PreparedStatement deleteStmt = null;
 		
@@ -134,11 +136,12 @@ public class PrescriptionsDao {
 			
 			if (results.next()) {
 				int resultPrescriptionId = results.getInt("PrescriptionId");
-				String resultCustomer = results.getString("Customer");
-				String resultDrug = results.getString("Drug");
+				String resultCustomer = results.getString("CustomerUserName");
+				String resultDrug = results.getString("DrugId");
 				Date resultFillDate = results.getDate("FillDate");
-				String resultDoctor = results.getString("Doctor");
-				Prescriptions prescription = new Prescriptions(resultPrescriptionId, resultCustomer, resultDrug, resultFillDate, resultDoctor);
+				String resultDoctor = results.getString("DoctorUserName");
+				Prescriptions prescription = new Prescriptions(resultPrescriptionId, resultCustomer,
+															   resultDrug, resultFillDate, resultDoctor);
 				return prescription;
 			}
 		} catch (SQLException e) {
@@ -156,9 +159,5 @@ public class PrescriptionsDao {
 			}	
 		}
 		return null;
-	}
-	
-
-	
-	
+	}	
 }

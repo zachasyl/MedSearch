@@ -125,8 +125,8 @@ public Users updatePhone(Users user, String newPhone) throws SQLException {
 		
 
 public Users getUserByUserName(String username) throws SQLException {
-	String selectBlogComment =
-		"SELECT UserName, Password, Phone, Street1, Street2, City, State, Zipcode" +
+	String selectUser =
+		"SELECT UserName, Password, Phone, Street1, Street2, City, State, Zipcode " +
 		"FROM Users " +
 		"WHERE UserName=?;";
 	Connection connection = null;
@@ -134,7 +134,7 @@ public Users getUserByUserName(String username) throws SQLException {
 	ResultSet results = null;
 	try {
 		connection = connectionManager.getConnection();
-		selectStmt = connection.prepareStatement(selectBlogComment);
+		selectStmt = connection.prepareStatement(selectUser);
 		selectStmt.setString(1, username);
 		results = selectStmt.executeQuery();
 		if(results.next()) {
@@ -147,8 +147,6 @@ public Users getUserByUserName(String username) throws SQLException {
 			String state = results.getString("Street2");
 			String zipcode = results.getString("Zipcode");
 
-		
-			
 			Users user = new Users(resultUserName, password, phone,
 					street1, street2, city, state, zipcode);
 					
