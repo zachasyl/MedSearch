@@ -125,20 +125,18 @@ public Users updatePhone(Users user, String newPhone) throws SQLException {
 		
 
 public Users getUserByUserName(String username) throws SQLException {
-	String selectUser =
-		"SELECT UserName, Password, Phone, Street1, Street2, City, State, Zipcode " +
-		"FROM Users " +
-		"WHERE UserName=?;";
+	String selectBlogComment =
+		"SELECT * FROM Users WHERE UserName=?;";
 	Connection connection = null;
 	PreparedStatement selectStmt = null;
 	ResultSet results = null;
 	try {
 		connection = connectionManager.getConnection();
-		selectStmt = connection.prepareStatement(selectUser);
+		selectStmt = connection.prepareStatement(selectBlogComment);
 		selectStmt.setString(1, username);
 		results = selectStmt.executeQuery();
 		if(results.next()) {
-			String resultUserName = results.getString("UserName");
+			String Resultusername = results.getString("UserName");
 			String password = results.getString("Password");
 			String phone = results.getString("Phone");
 			String street1 = results.getString("Street1");
@@ -147,7 +145,9 @@ public Users getUserByUserName(String username) throws SQLException {
 			String state = results.getString("Street2");
 			String zipcode = results.getString("Zipcode");
 
-			Users user = new Users(resultUserName, password, phone,
+		
+			
+			Users user = new Users(Resultusername, password, phone,
 					street1, street2, city, state, zipcode);
 					
 			return user;
@@ -217,10 +217,7 @@ public List<Users> getUsersById(String username) throws SQLException {
 		}
 	}
 	return null;
-}
-
-
-
+	}
 
 
 }
