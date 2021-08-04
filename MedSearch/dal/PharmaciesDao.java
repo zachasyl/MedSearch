@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,7 +17,6 @@ import model.Users;
 public class PharmaciesDao extends UsersDao {
 
 
-protected ConnectionManager connectionManager;
 
 private static PharmaciesDao instance = null;
 protected PharmaciesDao() {
@@ -67,15 +65,15 @@ public Pharmacies create(Pharmacies pharmacy) throws SQLException {
 	}
 }
 
-// This is a list because according to our schema its possible pharmacies may have the same name
-// the only unique identifier is the username for each pharmacy.
+// This is a list since multiple pharmacies can have the same name and we 
+// are getting by name not username.
 public List<Pharmacies> getPharmacyFromPharmacyName(String pharmacyname) throws SQLException {
 	List<Pharmacies> pharmacies = new ArrayList<Pharmacies>();
 
 	String selectDoctor =
 		"SELECT Pharmacies.UserName AS UserName, PharmacyName, OpenTime, CloseTime, Password, Phone, Street1, Street2, City, State, Zipcode" +
-		"FROM Pharmacies INNER JOIN Users " +
-		"  ON Pharmacies.UserName = Users.UserName " +
+		" FROM Pharmacies INNER JOIN Users " +
+		"ON Pharmacies.UserName = Users.UserName " +
 		"WHERE Pharmacies.PharmacyName=?;";
 	Connection connection = null;
 	PreparedStatement selectStmt = null;
@@ -88,8 +86,8 @@ public List<Pharmacies> getPharmacyFromPharmacyName(String pharmacyname) throws 
 		while(results.next()) {
 			String username = results.getString("UserName");
 			String resultPharmacyName = results.getString("PharmacyName");
-			Time opentime = results.getTime("OpenTime");
-			Time closetime = results.getTime("OpenTime");
+			Date opentime = results.getDate("OpenTime");
+			Date closetime = results.getDate("OpenTime");
 			String password = results.getString("Password");
 			String phone = results.getString("Phone");
 			String street1 = results.getString("Street1");
