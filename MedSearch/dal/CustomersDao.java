@@ -12,7 +12,6 @@ import model.Users;
 public class CustomersDao extends UsersDao {
 
 
-protected ConnectionManager connectionManager;
 
 private static CustomersDao instance = null;
 protected CustomersDao() {
@@ -60,11 +59,13 @@ public Customers create(Customers customer) throws SQLException {
 }
 
 
+
+
 public Customers getCustomerFromUserName(String userName) throws SQLException {
 	String selectDoctor =
-		"SELECT Customers.UserName AS UserName, FirstName, LastName, Age, Sex, Password, Phone, Street1, Street2, City, State, Zipcode" +
+		"SELECT Customers.UserName AS UserName, FirstName, LastName, Age, Sex, Password, Phone, Street1, Street2, City, State, Zipcode " +
 		"FROM Customers INNER JOIN Users " +
-		"  ON Customers.UserName = Users.UserName " +
+		"ON Customers.UserName = Users.UserName " +
 		"WHERE Customers.UserName=?;";
 	Connection connection = null;
 	PreparedStatement selectStmt = null;
