@@ -1,6 +1,7 @@
 package dal;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,16 +11,14 @@ import java.util.Date;
 import java.util.List;
 
 import model.*;
-import model.Doctors;
-import model.Users;
 
 public class DoctorsDao extends UsersDao {
 
 
-protected ConnectionManager connectionManager;
 
 private static DoctorsDao instance = null;
 protected DoctorsDao() {
+	
 	super();
 }
 public static DoctorsDao getInstance() {
@@ -34,8 +33,7 @@ public Doctors create(Doctors doctor) throws SQLException {
 			doctor.getCity(), doctor.getState(), doctor.getZipcode()));
 	
 	String insertDoctor =
-		"INSERT INTO Doctors(UserName, FirstName, LastName) " +
-		"VALUES(?,?, ?);";
+		"INSERT INTO Doctors(UserName, FirstName, LastName) VALUES(?,?, ?);";
 	Connection connection = null;
 	PreparedStatement insertStmt = null;
 	try {
@@ -64,24 +62,22 @@ public Doctors create(Doctors doctor) throws SQLException {
 }
 
 
-public Doctors getDoctorFromUserName(String userName) throws SQLException {
+public Doctors getDoctorFromUserName(String username) throws SQLException {
 	String selectDoctor =
-		"SELECT Doctors.UserName AS UserName, FirstName, LastName, Password, Phone, Street1, Street2, City, State, Zipcode" +
-		"FROM Doctors INNER JOIN Users " +
-		"  ON Doctors.UserName = Users.UserName " +
-		"WHERE Doctors.UserName=?;";
+
+		"SELECT Doctors.UserName AS UserName, FirstName, LastName, "
+		+ "Password, Phone, Street1, Street2, City, State, Zipcode "
+		+ "FROM Doctors INNER JOIN Users ON Doctors.UserName = Users.UserName WHERE Doctors.UserName=?;";
 	Connection connection = null;
 	PreparedStatement selectStmt = null;
 	ResultSet results = null;
 	try {
 		connection = connectionManager.getConnection();
 		selectStmt = connection.prepareStatement(selectDoctor);
-		selectStmt.setString(1, userName);
+		selectStmt.setString(1, username);
 		results = selectStmt.executeQuery();
 		if(results.next()) {
 			String resultUserName = results.getString("UserName");
-			String firstName = results.getString("FirstName");
-			String lastName = results.getString("LastName");
 			String password = results.getString("Password");
 			String phone = results.getString("Phone");
 			String street1 = results.getString("Street1");
@@ -89,10 +85,12 @@ public Doctors getDoctorFromUserName(String userName) throws SQLException {
 			String city = results.getString("City");
 			String state = results.getString("State");
 			String zipcode = results.getString("Zipcode");
+			String firstName = results.getString("FirstName");
+			String lastName = results.getString("LastName");
 
 
-			Doctors doctor = new Doctors(resultUserName, firstName, lastName, password,
-					phone, street1, street2, city, state, zipcode);
+			Doctors doctor = new Doctors(resultUserName, password,
+					phone, street1, street2, city, state, zipcode, firstName, lastName);
 			return doctor;
 		}
 	} catch (SQLException e) {
@@ -110,6 +108,58 @@ public Doctors getDoctorFromUserName(String userName) throws SQLException {
 		}
 	}
 	return null;
+}
+
+
+
+public List<Doctors> getDoctorFromLastName(String lastname) throws SQLException {
+	List<Doctors> doctors = new ArrayList<Doctors>();
+
+	String selectDoctor =
+
+		"SELECT Doctors.UserName AS UserName, FirstName, LastName, "
+		+ "Password, Phone, Street1, Street2, City, State, Zipcode "
+		+ "FROM Doctors INNER JOIN Users ON Doctors.UserName = Users.UserName WHERE Doctors.LastName=?;";
+	Connection connection = null;
+	PreparedStatement selectStmt = null;
+	ResultSet results = null;
+	try {
+		connection = connectionManager.getConnection();
+		selectStmt = connection.prepareStatement(selectDoctor);
+		selectStmt.setString(1, lastname);
+		results = selectStmt.executeQuery();
+		while(results.next()) {
+			String username = results.getString("UserName");
+			String password = results.getString("Password");
+			String phone = results.getString("Phone");
+			String street1 = results.getString("Street1");
+			String street2 = results.getString("Street2");
+			String city = results.getString("City");
+			String state = results.getString("State");
+			String zipcode = results.getString("Zipcode");
+			String firstName = results.getString("FirstName");
+			String lastName = results.getString("LastName");
+
+
+			Doctors doctor = new Doctors(username, password,
+					phone, street1, street2, city, state, zipcode, firstName, lastName);
+			doctors.add(doctor);
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+		throw e;
+	} finally {
+		if(connection != null) {
+			connection.close();
+		}
+		if(selectStmt != null) {
+			selectStmt.close();
+		}
+		if(results != null) {
+			results.close();
+		}
+	}
+	return doctors;
 }
 
 
