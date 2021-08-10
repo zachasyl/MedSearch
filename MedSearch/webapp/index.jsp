@@ -27,6 +27,7 @@
 									an Existing Interaction</a></li>
 							<li><a class="dropdown-item" href="prescriptionsupdate">Update
 									Prescription</a></li>
+							<li><a class="dropdown-item" href="findcustomer">Find Customer</a></li>
 						</ul></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="dropdown1"
@@ -39,6 +40,11 @@
 									Drug Interactions</a></li>
 							<li><a class="dropdown-item" href="finddrugprices">Find
 									Drug Prices</a></li>
+							<li><a class="dropdown-item" href="finddoctorlastname">
+							Find Doctor(Last name)</a></li>
+							<li><a class="dropdown-item" href="findpharmacy">Find Pharmacy</a></li>
+							
+
 							<li><a class="dropdown-item" href="userdelete">Delete User </a></li>
 						</ul></li>
 
