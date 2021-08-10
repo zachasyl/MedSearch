@@ -1,7 +1,7 @@
 package dal;
 
 
-
+import java.sql.Time;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -98,7 +98,7 @@ public List<Pharmacies> getPharmacyFromPharmacyName(String pharmacyname) throws 
 
 			
 			Pharmacies pharmacy = new Pharmacies(username, password, phone, street1, street2, city, state, zipcode, resultPharmacyName,
-					opentime, closetime);
+					new Time(opentime.getTime()), new Time(closetime.getTime()));
 			pharmacies.add(pharmacy);
 		}
 	} catch (SQLException e) {
