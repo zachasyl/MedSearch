@@ -1,15 +1,15 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<title>Delete a User</title>
+<meta charset="UTF-8">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<title>Reference</title>
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -58,43 +58,34 @@
 			</div>
 		</div>
 	</nav>
-<main class="mt-4 px-5">
-	<div>
-		<h1 class="display-4">MedSearch: Delete User</h1>
-		<hr class="my-4">
-		<div <c:if test="${messages.disableSubmit}">style="display:none"</c:if>>
-		<form action="userdelete" method="post">
-			<p> <label for="username">UserName:</label> <input
-				id="username" name="username"
-				value="${fn:escapeXml(param.username)}"> 
-			</p>
-			<p>
-				<span id="submitButton"
-					<c:if test="${messages.disableSubmit}">style="display:none"</c:if>>
-					<input type="submit" value="Delete" class="btn btn-primary">
-				</span>
-			</p>
-		</form>
-		</div>
-		<br /> <br />
-	</div>
-
-	<c:if test="${messages.fail != null}">
-		<br>
-		<div class="alert alert-danger" id="failMessage">${messages.fail}</div>
-		<br>
-	</c:if>
-
-	<c:if test="${messages.success != null}">
-		<br>
-		<div class="alert alert-success" id="successMessage">${messages.success}</div>
-		<br>
-	</c:if>
 	
-	</main>
+	<br>
+	<section class="mt-4 px-5">
+	<h1 class="display-4">Reference</h1>
+	<hr class="my-4">
+	<p>
+	Wishart DS, Feunang YD, Guo AC, Lo EJ, Marcu A, Grant JR, Sajed T, Johnson D, Li C, Sayeeda Z, Assempour N, Iynkkaran I, Liu Y, Maciejewski A, Gale N, Wilson A, Chin L, Cummings R, Le D, Pon A, Knox C, Wilson M. DrugBank 5.0: a major update to the DrugBank database for 2018. Nucleic Acids Res. 2017 Nov 8. doi: 10.1093/nar/gkx1037.
+	</p>
+	
+	<div class="jumbotron">
+	<h2 class="display-6">Legal Disclaimer</h2>
+	<p>
+	The content provided by this database is for general informational and educational purposes only and does not substitute as medical advice, diagnosis, and treatment. Always seek the advice of your physician or qualified health provider with any questions you may have regarding a medical condition.
+	</p>
+	<p>
+	The DrugBank Database may be used by individuals so long as the use itself or any works derived from the use of the DrugBank Database are not intended to generate sales or profit.
+	</p>
+	</div>
+	
+	</section>
 
 	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+	
 </body>
 </html>
+	
+	
+	
