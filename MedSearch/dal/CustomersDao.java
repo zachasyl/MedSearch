@@ -11,8 +11,6 @@ import model.Users;
 
 public class CustomersDao extends UsersDao {
 
-
-
 private static CustomersDao instance = null;
 protected CustomersDao() {
 	super();
@@ -29,8 +27,8 @@ public Customers create(Customers customer) throws SQLException {
 			customer.getCity(), customer.getState(), customer.getZipcode()));
 	
 	String insertDoctor =
-		"INSERT INTO Customers(UserName, FirstName, LastName) " +
-		"VALUES(?,?, ?);";
+		"INSERT INTO Customers(UserName, FirstName, LastName, Age, Sex) " +
+		"VALUES(?,?,?,?,?);";
 	Connection connection = null;
 	PreparedStatement insertStmt = null;
 	try {
@@ -39,7 +37,8 @@ public Customers create(Customers customer) throws SQLException {
 		insertStmt.setString(1, customer.getUserName());
 		insertStmt.setString(2, customer.getFirstName());
 		insertStmt.setString(3, customer.getLastName());
-		
+		insertStmt.setInt(4, customer.getAge());
+		insertStmt.setString(5, customer.getSex().name());
 		insertStmt.executeUpdate();
 		
 		return customer;
@@ -57,8 +56,6 @@ public Customers create(Customers customer) throws SQLException {
 		
 	}
 }
-
-
 
 
 public Customers getCustomerFromUserName(String userName) throws SQLException {
