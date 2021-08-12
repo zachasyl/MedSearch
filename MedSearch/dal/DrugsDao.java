@@ -178,6 +178,46 @@ public class DrugsDao {
 		return drugs;
 	}
 	
+	// matches any drugs with a description that contains the keyword
+	public List<Drugs> getDrugsByKeyword(String keyword) throws SQLException {
+		String selectDrugs = "SELECT * FROM Drugs WHERE Description LIKE ?;";
+		Connection connection = null;
+		PreparedStatement selectStmt = null;
+		ResultSet results = null;
+		List<Drugs> drugs = new ArrayList<Drugs>();
+		
+		try {
+			connection = connectionManager.getConnection();
+			selectStmt = connection.prepareStatement(selectDrugs);
+			selectStmt.setString(1, "%" + keyword + "%");
+			results = selectStmt.executeQuery();
+			
+			while (results.next()) {
+				String resultDrugId = results.getString("DrugId");
+				String resultDrugName = results.getString("DrugName");
+				String resultDescription = results.getString("Description");
+				Drugs drug = new Drugs(resultDrugId, resultDrugName, resultDescription);
+				drugs.add(drug);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(selectStmt != null) {
+				selectStmt.close();
+			}
+			if(results != null) {
+				results.close();
+			}
+		}
+		return drugs;
+	}
+	
+	
+	
 	
 	
 	
