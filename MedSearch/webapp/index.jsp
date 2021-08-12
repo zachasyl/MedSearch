@@ -35,6 +35,7 @@
 						data-bs-toggle="dropdown">Users</a>
 						<ul class="dropdown-menu">
 							<li><a class="dropdown-item" href="finddrugs">Find Drugs</a></li>
+							<li><a class="dropdown-item" href="finddrugsbykeyword">Find Drugs by Keyword</a></li>
 							<li><a class="dropdown-item" href="findprescriptions">Find
 									Prescriptions</a></li>
 							<li><a class="dropdown-item" href="findinteractions">Find
@@ -69,7 +70,7 @@
 				pharmacy staff, prescribers and healthcare workers who are unhappy
 				with using costly, proprietary applications and/or decentralized
 				databases.</p>
-			<a class="btn btn-outline-secondary" href="finddrugs">Find Drugs</a>
+			<a class="btn btn-outline-secondary" href="finddrugsbykeyword">Find Drugs</a>
 		</div>
 	</div>
 	<br />

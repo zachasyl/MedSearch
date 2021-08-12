@@ -38,6 +38,7 @@
 						data-bs-toggle="dropdown">Users</a>
 						<ul class="dropdown-menu">
 							<li><a class="dropdown-item" href="finddrugs">Find Drugs</a></li>
+							<li><a class="dropdown-item" href="finddrugsbykeyword">Find Drugs by Keyword</a></li>
 							<li><a class="dropdown-item" href="findprescriptions">Find
 									Prescriptions</a></li>
 							<li><a class="dropdown-item" href="findinteractions">Find
