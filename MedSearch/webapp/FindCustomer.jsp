@@ -16,6 +16,7 @@
 <body>
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
 		<div class="container-fluid">
+		<img src="logo.png" alt="" width="30" height="24"> &nbsp;
 			<a class="navbar-brand" href="./">MedSearch</a>
 			<div class="collapse navbar-collapse">
 				<ul class="navbar-nav me-auto mb-2 mb-sm-0">
@@ -63,13 +64,13 @@
 	</nav>
 
 	<section class="mt-4 px-5">
-	<div>
+	<div align="center">
 		<h1 class="display-4">MedSearch: Find Customer</h1>
 		<h2 class="lead">Look Up Customer by UserName</h2>
 		<hr class="my-4">
 		<form action="findcustomer" method="post">
 			<p>
-				<label for="username">user name: </label> <input id="1"
+				<label for="username">Username: </label> <input id="1"
 					name="username" value="${param.username}" placeholder="username"
 					required>
 			</p>
@@ -90,7 +91,7 @@
 		</c:if>
 		<table class="table" border="1">
 			<thead>
-				<tr>
+				<tr class="table-striped table-dark">
 					<th>UserName</th>
 					<th>FirstName</th>
 					<th>LastName</th>
@@ -103,7 +104,7 @@
 			</thead>
 			<tbody>
 				<c:if test="${customer!=null}">
-					<tr>
+					<tr class="table-striped table-dark">
 						<td>${customer.getUserName()}</td>
 						<td>${customer.getFirstName()}</td>
 						<td>${customer.getLastName()}</td>

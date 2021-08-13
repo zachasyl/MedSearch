@@ -17,6 +17,7 @@
 <body>
 	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
 		<div class="container-fluid">
+		<img src="logo.png" alt="" width="30" height="24"> &nbsp;
 			<a class="navbar-brand" href="./">MedSearch</a>
 			<div class="collapse navbar-collapse">
 				<ul class="navbar-nav me-auto mb-2 mb-sm-0">
@@ -63,7 +64,7 @@
 		</div>
 	</nav>
 <section class="mt-4 px-5">
-	<div>
+	<div align="center">
 		<h1 class="display-4">MedSearch: Update Prescription</h1>
 		<h2 class="lead">Update Fill Date</h2>
 		<hr class="my-4">

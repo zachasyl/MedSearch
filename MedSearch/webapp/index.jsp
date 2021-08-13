@@ -12,9 +12,18 @@
 <title>MedSearch</title>
 </head>
 <body>
-	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="./">MedSearch</a>
+      		<img src="logo.png" alt="" width="30" height="24"> &nbsp;
+			<a class="navbar-brand" href="./"> MedSearch</a>
 			<div class="collapse navbar-collapse">
 				<ul class="navbar-nav me-auto mb-2 mb-sm-0">
 					<li class="nav-item dropdown"><a
@@ -61,21 +70,23 @@
 	</nav>
 
 	<div
-		class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
-		<div class="col-md-5 p-lg-5 mx-auto my-5">
-			<h1 class="display-4 fw-normal">MedSearch</h1>
+		class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center">
+		<img src="logo.png" width="30%" height="30%"></img>
+		<div class="col-md-5 p-lg-5 mx-auto my-1">
+<!-- 			<h1 class="display-4 fw-normal">MedSearch</h1> -->
 			<p class="lead fw-normal">MedSearch is a medications application
 				that provides details about medication such as brand name, generic
 				name, side effects, and potential drug interactions for pharmacists,
 				pharmacy staff, prescribers and healthcare workers who are unhappy
 				with using costly, proprietary applications and/or decentralized
 				databases.</p>
-			<a class="btn btn-outline-secondary" href="finddrugsbykeyword">Find Drugs</a>
+			<a class="btn btn-outline-secondary" href="finddrugsbykeyword">Find Meds</a>
 		</div>
 	</div>
-	<br />
 
 	<!-- secondary text -->
+	<div class="p-3 p-md-5 m-md-3 bg-light">
+	
 	<div class="container marketing">
 
 		<!-- Three columns of text below the carousel -->
@@ -126,8 +137,7 @@
 			</div>
 		</div>
 	</div>
-
-
+	</div>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

@@ -16,6 +16,7 @@
 <body>
 	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
 		<div class="container-fluid">
+		<img src="logo.png" alt="" width="30" height="24"> &nbsp;
 			<a class="navbar-brand" href="./">MedSearch</a>
 			<div class="collapse navbar-collapse">
 				<ul class="navbar-nav me-auto mb-2 mb-sm-0">
@@ -62,7 +63,7 @@
 		</div>
 	</nav>
 <section class="mt-4 px-5">
-	<div>
+	<div align="center">
 		<h1 class="display-4">MedSearch: Find Doctor</h1>
 		<h2 class="lead">Look Up Doctor by Last Name</h2>
 		<hr class="my-4">
@@ -70,7 +71,7 @@
 		
 		<form action="finddoctorlastname" method="post">
 			<p>
-				<label for="DoctorLastName">last name: </label> <input id="1"
+				<label for="DoctorLastName">Last Name: </label> <input id="1"
 					name="lastname" value="${param.lastname}" placeholder="Dr. xxxx"
 					required>
 			</p>
@@ -90,7 +91,7 @@
 		<br>
 		</c:if>
 		<table class="table" border="1">
-				<tr>
+				<tr class="table-striped table-dark">
 					<th>UserName</th>
 					<th>First Name</th>
 					<th>Last Name</th>
@@ -103,7 +104,7 @@
 				</tr>
 				
 		<c:forEach items="${doctors}" var="doctor" >
-		<tr>
+		<tr class="table-striped table-dark">
 
 	   	  <td><c:out value="${doctor.getUserName()}" /></td>
 		  <td> <c:out value="${doctor.getFirstName()}" /></td>

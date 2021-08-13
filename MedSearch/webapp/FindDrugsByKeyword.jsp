@@ -16,6 +16,7 @@
 <body>
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
 		<div class="container-fluid">
+		<img src="logo.png" alt="" width="30" height="24"> &nbsp;
 			<a class="navbar-brand" href="./">MedSearch</a>
 			<div class="collapse navbar-collapse">
 				<ul class="navbar-nav me-auto mb-2 mb-sm-0">
@@ -62,12 +63,12 @@
 		</div>
 	</nav>
 <section class="mt-4 px-5">
-	<div>
+	<div align="center">
 		<h1 class="display-4">MedSearch: Find Drugs</h1>
 		<h2 class="lead">Look up by Keyword</h2>
 		<hr class="my-4">
 		<form action="finddrugsbykeyword" method="post">
-			<p>
+			<p >
 				<label for="keyword">Keyword: </label> <input id="keyword"
 					name="keyword" value="${param.keyword}" required>
 			</p>
@@ -88,14 +89,14 @@
 		</c:if>
 		<table class="table" border="1">
 			<thead>
-				<tr>
+				<tr class="table-striped table-dark">
 					<th>Drug ID</th>
 					<th>Drug Name</th>
 					<th>Description</th>
 				</tr>
 			<tbody>
 				<c:forEach items="${drugs}" var="drug">
-					<tr>
+					<tr class="table-striped table-dark">
 						<td>${drug.getDrugId()}</td>
 						<td>${drug.getDrugName()}</td>
 						<td>${drug.getDescription()}</td>

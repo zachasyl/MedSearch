@@ -16,6 +16,7 @@
 <body>
 	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
 		<div class="container-fluid">
+		<img src="logo.png" alt="" width="30" height="24"> &nbsp;
 			<a class="navbar-brand" href="./">MedSearch</a>
 			<div class="collapse navbar-collapse">
 				<ul class="navbar-nav me-auto mb-2 mb-sm-0">
@@ -62,7 +63,7 @@
 		</div>
 	</nav>
 <section class="mt-4 px-5">
-	<div>
+	<div align="center">
 		<h1 class="display-4">MedSearch: Find Pharmacy</h1>
 		<h2 class="lead">Look Up Pharmacy by Pharmacy Name</h2>
 		<hr class="my-4">
@@ -70,7 +71,7 @@
 		
 		<form action="findpharmacy" method="post">
 			<p>
-				<label for="PharmacyName">pharmacy name: </label> <input id="1"
+				<label for="PharmacyName">Pharmacy Name: </label> <input id="1"
 					name="username" value="${param.username}" placeholder="name"
 					required>
 			</p>
@@ -90,7 +91,7 @@
 		<br>
 		</c:if>
 		<table class="table" border="1">
-				<tr>
+				<tr class="table-striped table-dark">
 					<th>Pharmacy Name</th>
 					<th>User Name</th>
 					<th>Open Time</th>
@@ -106,7 +107,7 @@
 
 	<c:forEach items="${pharmacies}" var="pharmacy" >
 			  
-		  <tr>
+		  <tr class="table-striped table-dark">
 
 	      	<td><c:out value="${pharmacy.getPharmacyName()}" /></td>
 	      	<td><c:out value="${pharmacy.getUserName()}" /></td>

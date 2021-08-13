@@ -17,6 +17,7 @@
 <body>
 	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
 		<div class="container-fluid">
+			<img src="logo.png" alt="" width="30" height="24"> &nbsp;
 			<a class="navbar-brand" href="./">MedSearch</a>
 			<div class="collapse navbar-collapse">
 				<ul class="navbar-nav me-auto mb-2 mb-sm-0">
@@ -64,7 +65,7 @@
 	</nav>
 	<section class="mt-4 px-5">
 	<div>
-		<h1 class="display-4">MedSearch: Create Customer</h1>
+		<h1 align="center" class="display-4">MedSearch: Create Customer</h1>
 		<hr class="my-4">
 		<form action="createcustomer" method="post">
 

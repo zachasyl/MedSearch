@@ -16,6 +16,7 @@
 <body>
 	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
 		<div class="container-fluid">
+		<img src="logo.png" alt="" width="30" height="24"> &nbsp;
 			<a class="navbar-brand" href="./">MedSearch</a>
 			<div class="collapse navbar-collapse">
 				<ul class="navbar-nav me-auto mb-2 mb-sm-0">
@@ -62,7 +63,7 @@
 		</div>
 	</nav>
 <section class="mt-4 px-5">
-	<div>
+	<div align="center">
 		<h1 class="display-4">MedSearch: Find Drug Interactions</h1>
 		<h2 class="lead">Look Up by Drug Names</h2>
 		<hr class="my-4">
@@ -93,7 +94,7 @@
 		</c:if>
 		<table class="table" border="1">
 			<thead>
-				<tr>
+				<tr class="table-striped table-dark">
 					<th>Reaction ID</th>
 					<th>Drug Name</th>
 					<th>Drug Name</th>
@@ -102,7 +103,7 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${reactions}" var="reaction">
-					<tr>
+					<tr class="table-striped table-dark">
 						<td>${reaction.getReactionId()}</td>
 						<td>${drugNameA}</td>
 						<td>${reaction.getDrugName()}</td>
